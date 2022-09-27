@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app ="myApp" ng-controller = 'HomeCtrl'>
+
+<head>
+    <title>Page Title</title>
+    <script src= './Js/angular.min.js' ></script>      <!-- using offline  -->
+    <script src = './Js/custom.js'></script>
+</head>
+
+<body>
+
+    First Name :  <input type="text"  ng-model = 'firstName' placeholder="Enter your first Name"> <br>
+    Last Name  :  <input type="text" name="lastName" ng-model = 'lastName' placeholder="Enter your Last Name"> <br>
+    Age        :  <input type="number" name="age" ng-model = 'age' placeholder="Age"> <br>
+    Submit     :  <input type="submit" value="submit" ng-click = 'insert("Add")'> 
+   
+    <div style = "margin-top: 50px;">
+        <table>  
+            <tr><th>First_Name</th><th style = "padding-left: 20px;">Last_Name</th><th style = "padding-left: 20px;">Marks</th><th style = "padding-left: 20px;">Action</th></tr>  
+            <tr ng-repeat="x in groupArr track by $index">
+                <td ng-if="!x.isEdit">{{x.firstName}}</td>
+                <td ng-if="x.isEdit"><input type="text"  ng-model = 'x.firstName'> </td>
+
+                <td style = "padding-left: 20px;" ng-if="!x.isEdit">{{x.lastName}}</td>
+                <td style = "padding-left: 20px;" ng-if="x.isEdit"><input type="text" name="lastName" ng-model = 'x.lastName'> </td>
+                
+                <td style = "padding-left: 20px;" ng-if="!x.isEdit"> {{x.age}}</td>
+                <td style = "padding-left: 20px;" ng-if="x.isEdit"> <input type="number" name="age" ng-model = 'x.age'> </td>
+                
+                <td ng-if="x.isEdit"><input type="submit" value="Save" ng-click = 'insert("EditSave", $index)'> </td>
+                <td ng-if="x.isEdit"><input type="submit" value="cancel" ng-click = 'insert("cancel",$index)'> </td>
+
+
+                <td style = "padding-left: 20px;" ng-if="!x.isEdit"><input type="submit" value="Edit" ng-click = 'insert("Edit", $index)'> </td>
+                <td><input type="submit" value="Delete" ng-click = 'insert("Delete",$index)'> </td>
+            </tr>  
+            </table> 
+    </div>
+</body>
+
+</html>
